@@ -1,0 +1,32 @@
+{
+  "name": "briskly",
+  "version": "0.0.1",
+  "description": "A lean framework for briskly developing web applications",
+  "main": "src/index",
+  "scripts": {
+    "test": "mocha",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seikho/briskly.git"
+  },
+  "keywords": [
+    "web",
+    "framework",
+    "scaffold",
+    "briskly"
+  ],
+  "author": "Carl Winkler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seikho/briskly/issues"
+  },
+  "homepage": "https://github.com/seikho/briskly#readme",
+  "devDependencies": {
+    "typescript": "^1.6.2"
+  },
+  "dependencies": {
+    "cajon": "^0.2.11"
+  }
+}
