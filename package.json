@@ -1,6 +1,6 @@
 {
   "name": "briskly",
-  "version": "0.0.1",
+  "version": "0.1.0-pre",
   "description": "A lean framework for briskly developing web applications",
   "main": "src/index",
   "scripts": {
@@ -27,6 +27,9 @@
     "typescript": "^1.6.2"
   },
   "dependencies": {
-    "cajon": "^0.2.11"
+    "bootstrap": "^3.3.5",
+    "cajon": "^0.2.11",
+    "hapi": "^10.0.1",
+    "knockout": "^3.3.0"
   }
 }
