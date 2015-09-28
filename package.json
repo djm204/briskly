@@ -5,7 +5,8 @@
   "main": "src/index",
   "scripts": {
     "test": "mocha",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node src/index"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "bootstrap": "^3.3.5",
     "cajon": "^0.2.11",
     "hapi": "^10.0.1",
-    "knockout": "^3.3.0"
+    "knockout": "^3.3.0",
+    "ls-logger": "^0.2.1"
   }
 }
