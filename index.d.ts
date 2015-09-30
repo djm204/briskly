@@ -5,5 +5,7 @@ export interface Config {
 }
 
 export interface Route {
-    
+    method: string;
+    handler: string;
+    aliases?: string[];    
 }
