@@ -1,4 +1,10 @@
 {
-    "routes": [        
-    ]
+    "routes": {
+        "/": {
+            "method": "GET",
+            "handler": "test/routes/home",
+            "aliases": ["index.html", "index.php", "index.shtml"]
+        }
+    }
+    
 }
