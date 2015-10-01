@@ -7,8 +7,9 @@ function init() {
     // Parse briskly.json routes
     routeLoader();
     // Start the web server
-    web.start()
-        .then(function () { return log.info('Web server started'); });
+    var webStart = web.start();
+    webStart.then(function () { return log.info('Web server started'); });
+    return webStart;
 }
-module.exports = init;
+exports.init = init;
 //# sourceMappingURL=index.js.map
