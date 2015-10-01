@@ -1,9 +1,15 @@
 {
+    "port": 7331,
     "routes": {
-        "/": {
+        "/five": {
             "method": "GET",
             "handler": "test/routes/home",
             "aliases": ["index.html", "index.php", "index.shtml"]
+        },
+        
+        "/inline-five": {
+            "method": "GET",
+            "handler": "function (req, reply) { reply('five'); }"
         }
     }
     
