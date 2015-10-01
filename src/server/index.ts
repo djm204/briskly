@@ -1,9 +1,11 @@
 import Hapi = require('hapi');
 import Promise = require('bluebird');
 import log = require('ls-logger');
+import json = require('../json/read');
 var inert = require('insert');
 
 export var server = new Hapi.Server();
+var webPort = json.port || 1337;
 
 server.register(inert, err => {
     if (err) log.error('Unknown to load "inert" middleware');
@@ -34,5 +36,3 @@ export function stop(timeout?: number) {
     
     return promise;
 }
-
-var webPort = 1337;
