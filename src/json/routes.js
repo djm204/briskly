@@ -1,4 +1,3 @@
-var Types = require('../../index.d.ts');
 var json = require('./read');
 var log = require('ls-logger');
 var server_1 = require('../server');
@@ -21,7 +20,7 @@ function parseRoutes() {
             log.warn(routePath + ": No handler found. Route ignored.");
             continue;
         }
-        switch (getHandlerType(routePath)) {
+        switch (getHandlerType(route)) {
             case 0 /* Function */:
                 addFunctionRoute(route);
                 break;
@@ -40,8 +39,10 @@ function parseRoutes() {
     }
 }
 function addFunctionRoute(route) {
-    if (!isValidFunctionRoute(route))
+    if (!isValidFunctionRoute(route)) {
+        log.warn(route.path + ": Handler is not a function. Route ignored.");
         return;
+    }
     var method = route.method.toUpperCase();
     try {
         /**
@@ -65,7 +66,7 @@ function addFunctionRoute(route) {
     }
     catch (ex) { } // Couldn't eval the function. We're not too fussed here. It was worth a shot.      
     try {
-        var routeHandler = require(handlerPath(route));
+        var routeHandler = require(getHandlerPath(route));
         server_1.server.route({
             method: method,
             path: route.path,
@@ -78,15 +79,16 @@ function addFunctionRoute(route) {
     }
 }
 function addFileRoute(route) {
-    var handlerPath = handlerPath(route.handler);
+    var handlerPath = getHandlerPath(route);
     server_1.server.route({
         method: route.method.toUpperCase(),
         path: route.path,
         handler: function (request, reply) { return reply.file(handlerPath); }
     });
+    log.info(route.path + ": File route added");
 }
 function addDirectoryRoute(route) {
-    var handlerPath = handlerPath(route.handler);
+    var handlerPath = getHandlerPath(route);
     server_1.server.route({
         method: route.method.toUpperCase(),
         path: route.path + '/{param*}',
@@ -96,27 +98,32 @@ function addDirectoryRoute(route) {
             }
         }
     });
+    log.info(route.path + ": Directory route added");
 }
-function handlerPath(route) {
+function getHandlerPath(route) {
     var handlerPath = path.resolve(path.join(workingDirectory, route.handler));
     return handlerPath;
 }
 function isValidFunctionRoute(route) {
-    var routeHandler = require(handlerPath(route));
-    if (typeof routeHandler !== 'function') {
-        log.warn(route.path + ": Handler is not a function. Route ignored.");
-        return false;
+    try {
+        var evalFunc = eval("(" + route.handler + ")");
+        if (typeof evalFunc === 'function')
+            return true;
     }
-    return true;
+    catch (ex) { }
+    var routeHandler = require(getHandlerPath(route));
+    return typeof routeHandler === 'function';
 }
 function getExtension(routePath) {
     var ext = path.extname(routePath) || '.js';
     return ext;
 }
-function getHandlerType(handler) {
-    var handlerPath = handlerPath(handler);
-    var extension = getExtension(handler);
-    if (extension === '.js' || extension === '')
+function getHandlerType(route) {
+    var handlerPath = getHandlerPath(route);
+    var extension = getExtension(route.handler);
+    if (extension === '.js')
+        return 0 /* Function */;
+    if (extension === '' && isValidFunctionRoute(route))
         return 0 /* Function */;
     try {
         var stat = fs.statSync(handlerPath);

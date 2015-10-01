@@ -1,7 +1,4 @@
 import Types = require('../../index.d.ts');
-import Handler = Types.Handler;
-import Route = Types.Route;
-
 import json = require('./read');
 import log = require('ls-logger');
 import { server } from '../server';
@@ -31,19 +28,19 @@ function parseRoutes() {
             continue;
         }
 
-        switch (getHandlerType(routePath)) {
+        switch (getHandlerType(route)) {
             case Handler.Function:
                 addFunctionRoute(route);
                 break;
-                
+
             case Handler.File:
                 addFileRoute(route);
                 break;
-                
+
             case Handler.Directory:
                 addDirectoryRoute(route);
                 break;
-                
+
             default: {
                 log.error(`${routePath}: Unable to determine route handler type. Route ignored.`);
                 // TODO
@@ -53,8 +50,11 @@ function parseRoutes() {
     }
 }
 
-function addFunctionRoute(route: Route) {
-    if (!isValidFunctionRoute(route)) return;
+function addFunctionRoute(route: Types.Route) {
+    if (!isValidFunctionRoute(route)) {
+        log.warn(`${route.path}: Handler is not a function. Route ignored.`);
+        return;
+    }
     var method = route.method.toUpperCase();
 
     try {
@@ -65,7 +65,7 @@ function addFunctionRoute(route: Route) {
          * handler: function(request, reply) { reply(request.payload.left + request.payload.right); }
          * 
          * However, this is fairly insane.
-         * */ 
+         * */
         var evalFunc = eval(`(${route.handler})`);
         if (typeof evalFunc === 'function') {
             server.route({
@@ -80,7 +80,7 @@ function addFunctionRoute(route: Route) {
     catch (ex) { } // Couldn't eval the function. We're not too fussed here. It was worth a shot.      
                
     try {
-        var routeHandler = require(handlerPath(route));
+        var routeHandler = require(getHandlerPath(route));
 
         server.route({
             method,
@@ -94,19 +94,21 @@ function addFunctionRoute(route: Route) {
     }
 }
 
-function addFileRoute(route: Route) {
-    var handlerPath = handlerPath(route.handler);
-    
+function addFileRoute(route: Types.Route) {
+    var handlerPath = getHandlerPath(route);
+
     server.route({
         method: route.method.toUpperCase(),
         path: route.path,
         handler: (request, reply) => reply.file(handlerPath)
-    });    
+    });
+
+    log.info(`${route.path}: File route added`);
 }
 
-function addDirectoryRoute(route: Route) {
-    var handlerPath = handlerPath(route.handler);
-    
+function addDirectoryRoute(route: Types.Route) {
+    var handlerPath = getHandlerPath(route);
+
     server.route({
         method: route.method.toUpperCase(),
         path: route.path + '/{param*}',
@@ -114,23 +116,26 @@ function addDirectoryRoute(route: Route) {
             directory: {
                 path: handlerPath
             }
-        } 
-    })
+        }
+    });
+
+    log.info(`${route.path}: Directory route added`);
 }
 
-function handlerPath(route: Route) {
+function getHandlerPath(route: Types.Route) {
     var handlerPath = path.resolve(path.join(workingDirectory, route.handler));
     return handlerPath;
 }
 
-function isValidFunctionRoute(route: Route) {
-    var routeHandler = require(handlerPath(route));
-    if (typeof routeHandler !== 'function') {
-        log.warn(`${route.path}: Handler is not a function. Route ignored.`);
-        return false;
-    }
-
-    return true;
+function isValidFunctionRoute(route: Types.Route) {
+    try {
+        var evalFunc = eval(`(${route.handler})`);
+        if (typeof evalFunc === 'function')
+            return true;
+    } catch (ex) { }
+    
+    var routeHandler = require(getHandlerPath(route));
+    return typeof routeHandler === 'function';
 }
 
 function getExtension(routePath: string) {
@@ -139,12 +144,15 @@ function getExtension(routePath: string) {
     return ext;
 }
 
-function getHandlerType(handler: string): Handler {
-    var handlerPath = handlerPath(handler);
+function getHandlerType(route: Types.Route): Handler {
+    var handlerPath = getHandlerPath(route);
 
-    var extension = getExtension(handler);
-    if (extension === '.js' || extension === '')
+    var extension = getExtension(route.handler);
+    if (extension === '.js')
         return Handler.Function;
+
+    if (extension === '' && isValidFunctionRoute(route))
+        return Handler.Function
 
     try {
         var stat = fs.statSync(handlerPath);
@@ -152,8 +160,16 @@ function getHandlerType(handler: string): Handler {
         if (stat.isFile()) return Handler.File;
         if (stat.isDirectory()) return Handler.Directory;
 
-        return Types.Handler.Unknown;
+        return Handler.Unknown;
     } catch (ex) {
-        return Types.Handler.NotFound;
+        return Handler.NotFound;
     }
-} 
+}
+
+const enum Handler {
+    Function,
+    Directory,
+    File,
+    NotFound,
+    Unknown
+}
