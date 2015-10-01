@@ -2,18 +2,19 @@ import Hapi = require('hapi');
 import Promise = require('bluebird');
 import log = require('ls-logger');
 import json = require('../json/read');
-var inert = require('insert');
+var inert = require('inert');
 
 export var server = new Hapi.Server();
 var webPort = json.port || 1337;
+
+server.connection({
+    port: webPort
+});
 
 server.register(inert, err => {
     if (err) log.error('Unknown to load "inert" middleware');
 });
 
-export function setPort(port?: number) {
-    webPort = port;
-}
 
 export function start(port?: number) {
     var promise = new Promise<boolean>((resolve, reject) => {
