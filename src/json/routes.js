@@ -130,4 +130,5 @@ function getHandlerType(handler) {
         return 3 /* NotFound */;
     }
 }
+module.exports = parseRoutes;
 //# sourceMappingURL=routes.js.map

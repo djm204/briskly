@@ -7,6 +7,7 @@ import log = require('ls-logger');
 import { server } from '../server';
 import path = require('path');
 import fs = require('fs');
+export = parseRoutes;
 
 var workingDirectory = process.env.PWD;
 
