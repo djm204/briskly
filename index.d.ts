@@ -12,3 +12,10 @@ export interface Route {
     path?: string;
     aliases?: string[];    
 }
+
+export const enum Handler {
+    Directory,
+    File,
+    NotFound,
+    Unknown
+}
