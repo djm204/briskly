@@ -1,6 +1,12 @@
 var Hapi = require('hapi');
 var Promise = require('bluebird');
+var log = require('ls-logger');
+var inert = require('insert');
 exports.server = new Hapi.Server();
+exports.server.register(inert, function (err) {
+    if (err)
+        log.error('Unknown to load "inert" middleware');
+});
 function setPort(port) {
     webPort = port;
 }
