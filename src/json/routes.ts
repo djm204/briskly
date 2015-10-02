@@ -16,8 +16,9 @@ function parseRoutes() {
 
     for (var routePath in json.routes) {
         var route: Types.Route = json.routes[routePath];
-        route.path = routePath;
-
+        var firstCharIsSlash = routePath.slice(0,1) === '/';
+        route.path = `${firstCharIsSlash ? '' : '/'}${routePath}`;
+        
         if (!route.method) {
             log.warn(`${routePath}: No method found. Route ignored.`);
             continue;
