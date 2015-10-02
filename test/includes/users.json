@@ -1,0 +1,6 @@
+{
+    "users": {
+        "method": "GET",
+        "handler": "function (req, reply) { reply([{'id': 1, 'name': 'seikho'},{'id': 2, 'name': 'james'}]); }"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "maths/add": {
+        "method": "GET",
+        "handler": "function(req, reply) { reply(req.payload.left + req.payload.right); }"
+    }
+}
