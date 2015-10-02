@@ -10,6 +10,19 @@
         "/inline-five": {
             "method": "GET",
             "handler": "function (req, reply) { reply('five'); }"
+        },
+        "include": {
+            "root": "test/includes",
+            "files": [
+                "users.json",
+                "maths"
+            ]
+        }
+    },
+    "components": {
+        "br-modal": {
+            "template": "test/components/modal/view.html",
+            "viewModel": "test/components/modal/modal.js"
         }
     }
     
