@@ -1,6 +1,10 @@
 {
     "maths/add": {
+        "method": "POST",
+        "handler": "function (req, reply) { reply((+req.payload.left) + (+req.payload.right)); }"
+    },
+    "maths/sub/{left}/{right}": {
         "method": "GET",
-        "handler": "function(req, reply) { reply(req.payload.left + req.payload.right); }"
+        "handler": "function (req, reply) { reply((+req.params.left) - (+req.params.right)); }"
     }
 }
