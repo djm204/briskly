@@ -16,6 +16,7 @@ function parseRoutes() {
 
     for (var routePath in json.routes) {
         var route: Types.Route = json.routes[routePath];
+        if (routePath.toLowerCase() === 'include') continue;
         var firstCharIsSlash = routePath.slice(0,1) === '/';
         route.path = `${firstCharIsSlash ? '' : '/'}${routePath}`;
         
@@ -152,7 +153,7 @@ function getHandlerType(route: Types.Route): Handler {
     if (extension === '.js')
         return Handler.Function;
 
-    if (extension === '' && isValidFunctionRoute(route))
+    if (isValidFunctionRoute(route))
         return Handler.Function
 
     try {

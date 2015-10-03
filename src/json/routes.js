@@ -11,6 +11,8 @@ function parseRoutes() {
     }
     for (var routePath in json.routes) {
         var route = json.routes[routePath];
+        if (routePath.toLowerCase() === 'include')
+            continue;
         var firstCharIsSlash = routePath.slice(0, 1) === '/';
         route.path = "" + (firstCharIsSlash ? '' : '/') + routePath;
         if (!route.method) {
@@ -124,7 +126,7 @@ function getHandlerType(route) {
     var extension = getExtension(route.handler);
     if (extension === '.js')
         return 0 /* Function */;
-    if (extension === '' && isValidFunctionRoute(route))
+    if (isValidFunctionRoute(route))
         return 0 /* Function */;
     try {
         var stat = fs.statSync(handlerPath);
