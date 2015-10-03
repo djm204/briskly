@@ -20,18 +20,17 @@ function shimIncludes() {
     var files = include['files'];
     if (!Array.isArray(files))
         return;
-    var includePath = include['root'] || '/';
-    var basePath = path.resolve(path.join(workingDirectory, includePath));
     var addRoute = function (routePath, route) {
         if (brisklyJson.routes[route.path]) {
             logger.warn(routePath + ": Duplicate route. Route ignored.");
             return;
         }
         route.path = routePath;
+        // We do not need to do validation here because it'll be done in the route loader
         brisklyJson.routes[routePath] = route;
     };
     files.forEach(function (file) {
-        var filePath = path.resolve(path.join(basePath, file));
+        var filePath = getIncludePath(file, include);
         try {
             var includeBody = fs.readFileSync(filePath).toString();
             var json = JSON.parse(includeBody);
@@ -42,6 +41,13 @@ function shimIncludes() {
             logger.error(file + ": Unable to parse include: " + ex.message);
         }
     });
+}
+function getIncludePath(file, include) {
+    var includePath = include['root'] || '/';
+    var basePath = path.resolve(path.join(workingDirectory, includePath));
+    if (path.extname(file) === '')
+        file += '.json';
+    return path.resolve(path.join(basePath, file));
 }
 module.exports = brisklyJson;
 //# sourceMappingURL=read.js.map
