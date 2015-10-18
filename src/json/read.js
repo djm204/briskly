@@ -1,16 +1,8 @@
+var Cfg = require('briskly-json');
 var fs = require('fs');
 var path = require('path');
 var logger = require('ls-logger');
-var workingDirectory = process.env.PWD;
-var jsonPath = path.resolve(process.env.PWD, 'briskly.json');
-var brisklyJson;
-try {
-    brisklyJson = JSON.parse(fs.readFileSync(jsonPath).toString());
-    shimIncludes();
-}
-catch (ex) {
-    logger.error("Failed to read brisky.json: " + ex.message);
-}
+var brisklyJson = Cfg.json;
 function shimIncludes() {
     if (!brisklyJson.routes && brisklyJson.routes['include'])
         return;
@@ -44,7 +36,7 @@ function shimIncludes() {
 }
 function getIncludePath(file, include) {
     var includePath = include['root'] || '/';
-    var basePath = path.resolve(path.join(workingDirectory, includePath));
+    var basePath = path.join(process.cwd(), includePath);
     if (path.extname(file) === '')
         file += '.json';
     return path.resolve(path.join(basePath, file));

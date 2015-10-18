@@ -1,20 +1,10 @@
-import Types = require('../../index.d.ts');
+import Cfg = require('briskly-json');
 import fs = require('fs');
 import path = require('path');
 import logger = require('ls-logger');
 export = brisklyJson;
 
-var workingDirectory = process.env.PWD;
-var jsonPath = path.resolve(process.env.PWD, 'briskly.json');
-var brisklyJson: Types.Config;
-
-try {
-    brisklyJson = JSON.parse(fs.readFileSync(jsonPath).toString());
-    shimIncludes();
-}
-catch (ex) {
-    logger.error(`Failed to read brisky.json: ${ex.message}`);
-}
+var brisklyJson = Cfg.json;
 
 function shimIncludes() {
 
@@ -29,7 +19,7 @@ function shimIncludes() {
     if (!Array.isArray(files)) return;
 
 
-    var addRoute = (routePath: string, route: Types.Route) => {
+    var addRoute = (routePath: string, route: Cfg.Route) => {
         if (brisklyJson.routes[route.path]) {
             logger.warn(`${routePath}: Duplicate route. Route ignored.`);
             return;
@@ -55,9 +45,9 @@ function shimIncludes() {
     })
 }
 
-function getIncludePath(file: string, include: Types.Include) {
+function getIncludePath(file: string, include: Cfg.Include) {
     var includePath = include['root'] || '/';
-    var basePath = path.resolve(path.join(workingDirectory, includePath));
+    var basePath = path.join(process.cwd(), includePath);
     
     if (path.extname(file) === '') file += '.json';
     return path.resolve(path.join(basePath, file));
