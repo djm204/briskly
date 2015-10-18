@@ -1,6 +1,6 @@
 {
   "name": "briskly",
-  "version": "0.1.0-pre",
+  "version": "0.1.1-pre",
   "description": "A lean framework for briskly developing web applications",
   "main": "src/index",
   "scripts": {
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "briskly-json": "^0.1.1",
     "cajon": "^0.2.11",
     "hapi": "^10.0.1",
     "inert": "^3.0.1",
