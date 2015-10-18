@@ -1,4 +1,4 @@
-import Types = require('../index.d.ts');
+import Cfg = require('briskly-json');
 import Briskly = require('../src');
 import chai = require('chai');
 import req = require('request');

@@ -1,4 +1,4 @@
-import Types = require('../../index.d.ts');
+import Cfg = require('briskly-json');
 import json = require('./read');
 import log = require('ls-logger');
 import { server } from '../server';
@@ -15,7 +15,7 @@ function parseRoutes() {
     }
 
     for (var routePath in json.routes) {
-        var route: Types.Route = json.routes[routePath];
+        var route: Cfg.Route = json.routes[routePath];
         if (routePath.toLowerCase() === 'include') continue;
         var firstCharIsSlash = routePath.slice(0,1) === '/';
         route.path = `${firstCharIsSlash ? '' : '/'}${routePath}`;
@@ -52,7 +52,7 @@ function parseRoutes() {
     }
 }
 
-function addFunctionRoute(route: Types.Route) {
+function addFunctionRoute(route: Cfg.Route) {
     if (!isValidFunctionRoute(route)) {
         log.warn(`${route.path}: Handler is not a function. Route ignored.`);
         return;
@@ -96,7 +96,7 @@ function addFunctionRoute(route: Types.Route) {
     }
 }
 
-function addFileRoute(route: Types.Route) {
+function addFileRoute(route: Cfg.Route) {
     var handlerPath = getHandlerPath(route);
 
     server.route({
@@ -108,7 +108,7 @@ function addFileRoute(route: Types.Route) {
     log.info(`${route.path}: File route added`);
 }
 
-function addDirectoryRoute(route: Types.Route) {
+function addDirectoryRoute(route: Cfg.Route) {
     var handlerPath = getHandlerPath(route);
 
     server.route({
@@ -124,12 +124,12 @@ function addDirectoryRoute(route: Types.Route) {
     log.info(`${route.path}: Directory route added`);
 }
 
-function getHandlerPath(route: Types.Route) {
+function getHandlerPath(route: Cfg.Route) {
     var handlerPath = path.resolve(path.join(workingDirectory, route.handler));
     return handlerPath;
 }
 
-function isValidFunctionRoute(route: Types.Route) {
+function isValidFunctionRoute(route: Cfg.Route) {
     try {
         var evalFunc = eval(`(${route.handler})`);
         if (typeof evalFunc === 'function')
@@ -146,7 +146,7 @@ function getExtension(routePath: string) {
     return ext;
 }
 
-function getHandlerType(route: Types.Route): Handler {
+function getHandlerType(route: Cfg.Route): Handler {
     var handlerPath = getHandlerPath(route);
 
     var extension = getExtension(route.handler);
