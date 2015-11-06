@@ -67,8 +67,9 @@ function addFunctionRoute(route: Cfg.Route) {
          * handler: function(request, reply) { reply(request.payload.left + request.payload.right); }
          * 
          * However, this is fairly insane.
-         * */
+         */
         var evalFunc = eval(`(${route.handler})`);
+        
         if (typeof evalFunc === 'function') {
             server.route({
                 method,
@@ -113,7 +114,7 @@ function addDirectoryRoute(route: Cfg.Route) {
 
     server.route({
         method: route.method.toUpperCase(),
-        path: route.path + '/{param*}',
+        path: route.path + '/{...}',
         handler: {
             directory: handlerPath
         }
