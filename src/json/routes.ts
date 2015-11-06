@@ -1,10 +1,10 @@
-import Cfg = require('briskly-json');
-import json = require('./read');
-import log = require('ls-logger');
+import * as Cfg from 'briskly-json';
+import json from './read';
+import * as log from 'ls-logger';
 import { server } from '../server';
-import path = require('path');
-import fs = require('fs');
-export = parseRoutes;
+import * as path from 'path';
+import * as fs from 'fs';
+export { parseRoutes as default };
 
 var workingDirectory = process.env.PWD;
 
@@ -115,9 +115,7 @@ function addDirectoryRoute(route: Cfg.Route) {
         method: route.method.toUpperCase(),
         path: route.path + '/{param*}',
         handler: {
-            directory: {
-                path: handlerPath
-            }
+            directory: handlerPath
         }
     });
 

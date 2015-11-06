@@ -1,4 +1,4 @@
-import path = require('path');
+import * as path from 'path'
 import route = require('../routes/add');
 var root = path.resolve(__dirname, '../../node_modules');
 

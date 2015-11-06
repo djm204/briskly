@@ -1,8 +1,9 @@
-import Cfg = require('briskly-json');
-import fs = require('fs');
-import path = require('path');
-import logger = require('ls-logger');
-export = brisklyJson;
+import * as Cfg from 'briskly-json';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as logger from 'ls-logger';
+
+export { brisklyJson as default }
 
 var brisklyJson = Cfg.json;
 
