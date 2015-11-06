@@ -6,6 +6,7 @@ var path = require('path');
 var logger = require('ls-logger');
 var brisklyJson = Cfg.json;
 exports.default = brisklyJson;
+shimIncludes();
 function shimIncludes() {
     if (!brisklyJson.routes && brisklyJson.routes['include']) return;
     var include = brisklyJson.routes['include'];

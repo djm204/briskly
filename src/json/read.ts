@@ -7,6 +7,8 @@ export { brisklyJson as default }
 
 var brisklyJson = Cfg.json;
 
+shimIncludes();
+
 function shimIncludes() {
 
     if (!brisklyJson.routes && brisklyJson.routes['include'])

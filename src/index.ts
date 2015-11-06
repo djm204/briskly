@@ -9,7 +9,7 @@ export async function init() {
     
     // Parse briskly.json routes
     routeLoader();
-       
+          
     // Start the web server
     var webStart = web.start();
     var result = await webStart;
