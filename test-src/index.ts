@@ -1,8 +1,8 @@
-import Cfg = require('briskly-json');
-import Briskly = require('../src');
-import chai = require('chai');
-import req = require('request');
-import json = require('../src/json/read');
+import * as Cfg from 'briskly-json';
+import * as Briskly from '../src';
+import * as chai from 'chai';
+import * as req from 'request';
+import json from '../src/json/read';
 var expect = chai.expect;
 
 describe('json parsing tests', () => {
@@ -22,13 +22,10 @@ describe('json parsing tests', () => {
 
 describe('web server and route tests', () => {
 
-    it('will start the web server', done => {
-        Briskly.init()
-            .then(started => {
-                expect(started).to.be.true;
-                done();
-            })
-            .catch(done);
+    it('will start the web server', async (done) => {
+        var started = await Briskly.init();
+        expect(started).to.be.true;
+        done();        
     });
 
     it('will a load a typical route', done => {
