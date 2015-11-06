@@ -34,43 +34,33 @@ describe('web server and route tests', () => {
         expect(started).to.be.true;
         done();
     }));
-    it('will a load a typical route', done => {
-        get('five')
-            .then(body => {
-            expect(body).to.equal('five');
-            done();
-        }).catch(done);
-    });
-    it('will load an inline-handler route', done => {
-        get('inline-five')
-            .then(body => {
-            expect(body).to.equal('five');
-            done();
-        }).catch(done);
-    });
-    it('will load an included route that expects a form body', done => {
+    it('will a load a typical route', (done) => __awaiter(this, void 0, Promise, function* () {
+        var body = yield get('five');
+        expect(body).to.equal('five');
+        done();
+    }));
+    it('will load an inline-handler route', (done) => __awaiter(this, void 0, Promise, function* () {
+        var body = yield get('inline-five');
+        expect(body).to.equal('five');
+        done();
+    }));
+    it('will load an included route that expects a form body', (done) => __awaiter(this, void 0, Promise, function* () {
         var values = { left: 2, right: 3 };
-        post('maths/add', values)
-            .then(body => {
-            expect(body).to.equal('5');
-            done();
-        }).catch(done);
-    });
-    it('will load an included route that takes query parameters', done => {
-        get('maths/sub/10/6')
-            .then(body => {
-            expect(body).to.equal('4');
-            done();
-        }).catch(done);
-    });
-    it('will load an included route that loads a module', done => {
-        get('users')
-            .then(body => {
-            var arr = JSON.parse(body);
-            expect(Array.isArray(arr)).to.be.true;
-            done();
-        }).catch(done);
-    });
+        var body = yield post('maths/add', values);
+        expect(body).to.equal('5');
+        done();
+    }));
+    it('will load an included route that takes query parameters', (done) => __awaiter(this, void 0, Promise, function* () {
+        var body = yield get('maths/sub/10/6');
+        expect(body).to.equal('4');
+        done();
+    }));
+    it('will load an included route that loads a module', (done) => __awaiter(this, void 0, Promise, function* () {
+        var body = yield get('users');
+        var arr = JSON.parse(body);
+        expect(Array.isArray(arr)).to.be.true;
+        done();
+    }));
 });
 var base = 'http://localhost:7331/';
 function get(route) {
