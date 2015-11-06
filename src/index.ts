@@ -13,6 +13,7 @@ export async function init() {
     // Start the web server
     var webStart = web.start();
     var result = await webStart;
-    log.info('Web server started');   
+    log.info('Web server started');
+       
     return webStart;    
 }

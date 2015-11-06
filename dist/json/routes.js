@@ -87,7 +87,7 @@ function addFunctionRoute(route) {
          * handler: function(request, reply) { reply(request.payload.left + request.payload.right); }
          *
          * However, this is fairly insane.
-         * */
+         */
         var evalFunc = eval("(" + route.handler + ")");
         if (typeof evalFunc === 'function') {
             server_1.server.route({
@@ -126,7 +126,7 @@ function addDirectoryRoute(route) {
     var handlerPath = getHandlerPath(route);
     server_1.server.route({
         method: route.method.toUpperCase(),
-        path: route.path + '/{param*}',
+        path: route.path + '/{...}',
         handler: {
             directory: handlerPath
         }
