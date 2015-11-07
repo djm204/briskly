@@ -51,9 +51,14 @@ describe('web server and route tests', () => {
         done();
     }));
     it('will load an included route that takes query parameters', (done) => __awaiter(this, void 0, Promise, function* () {
-        var body = yield get('maths/sub/10/6');
-        expect(body).to.equal('4');
-        done();
+        try {
+            var body = yield get('maths/sub/12/6');
+            expect(body).to.equal('4');
+            done();
+        }
+        catch (ex) {
+            done(ex);
+        }
     }));
     it('will load an included route that loads a module', (done) => __awaiter(this, void 0, Promise, function* () {
         var body = yield get('users');

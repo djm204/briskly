@@ -48,9 +48,14 @@ describe('web server and route tests', () => {
     });
 
     it('will load an included route that takes query parameters', async (done) => {
-        var body = await get('maths/sub/10/6');
-        expect(body).to.equal('4');
-        done();
+        try {
+            var body = await get('maths/sub/12/6');
+            expect(body).to.equal('4');
+            done();
+        }
+        catch (ex) {
+            done(ex);
+        }
     });
 
     it('will load an included route that loads a module', async (done) => {

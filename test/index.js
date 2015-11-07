@@ -144,20 +144,29 @@ describe('web server and route tests', function () {
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) switch (_context5.prev = _context5.next) {
                     case 0:
-                        _context5.next = 2;
-                        return get('maths/sub/10/6');
+                        _context5.prev = 0;
+                        _context5.next = 3;
+                        return get('maths/sub/12/6');
 
-                    case 2:
+                    case 3:
                         body = _context5.sent;
 
                         expect(body).to.equal('4');
                         done();
+                        _context5.next = 11;
+                        break;
 
-                    case 5:
+                    case 8:
+                        _context5.prev = 8;
+                        _context5.t0 = _context5["catch"](0);
+
+                        done(_context5.t0);
+
+                    case 11:
                     case "end":
                         return _context5.stop();
                 }
-            }, _callee5, this);
+            }, _callee5, this, [[0, 8]]);
         }));
     });
     it('will load an included route that loads a module', function (done) {

@@ -39,7 +39,7 @@ var cajon = path.resolve(root, 'cajon/cajon.js');
 route.get('/scripts/bootstrap.js', function (request, reply) {
     return reply.file(bootstrapJs);
 });
-route.get('/styles/bootstrap.js', function (request, reply) {
+route.get('/styles/bootstrap.css', function (request, reply) {
     return reply.file(bootstrapCss);
 });
 route.get('/scripts/knockout.js', function (request, reply) {
