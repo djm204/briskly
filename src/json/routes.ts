@@ -6,7 +6,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 export { parseRoutes as default };
 
-var workingDirectory = process.env.PWD;
+var workingDirectory = process.cwd();
 
 function parseRoutes() {
     if (!json.routes) {
