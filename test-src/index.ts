@@ -25,55 +25,49 @@ describe('web server and route tests', () => {
     it('will start the web server', async (done) => {
         var started = await Briskly.init();
         expect(started).to.be.true;
-        done();        
+        done();
     });
 
-    it('will a load a typical route', done => {
-        get('five')
-            .then(body => {
-                expect(body).to.equal('five');
-                done();
-            }).catch(done);
+    it('will a load a typical route', async (done) => {
+        var body = await get('five');
+        expect(body).to.equal('five');
+        done();
     });
 
-    it('will load an inline-handler route', done => {
-        get('inline-five')
-            .then(body => {
-                expect(body).to.equal('five');
-                done();
-            }).catch(done);
+    it('will load an inline-handler route', async (done) => {
+        var body = await get('inline-five');
+        expect(body).to.equal('five');
+        done();
     });
 
-    it('will load an included route that expects a form body', done => {
+    it('will load an included route that expects a form body', async (done) => {
         var values = { left: 2, right: 3 };
-        post('maths/add', values)
-            .then(body => {
-                expect(body).to.equal('5');
-                done();
-            }).catch(done);
+        var body = await post('maths/add', values);
+        expect(body).to.equal('5');
+        done();
     });
 
-    it('will load an included route that takes query parameters', done => {
-        get('maths/sub/10/6')
-            .then(body => {
-                expect(body).to.equal('4');
-                done();
-            }).catch(done);
+    it('will load an included route that takes query parameters', async (done) => {
+        try {
+            var body = await get('maths/sub/12/6');
+            expect(body).to.equal('4');
+            done();
+        }
+        catch (ex) {
+            done(ex);
+        }
     });
 
-    it('will load an included route that loads a module', done => {
-        get('users')
-            .then(body => {
-                var arr = JSON.parse(body);
-                expect(Array.isArray(arr)).to.be.true;
-                done();
-            }).catch(done);
+    it('will load an included route that loads a module', async (done) => {
+        var body = await get('users');
+        var arr = JSON.parse(body);
+        expect(Array.isArray(arr)).to.be.true;
+        done();
     });
 });
 
 var base = 'http://localhost:7331/';
 function get(route: string) {
-    
     var promise = new Promise<any>((resolve, reject) => {
         req.get(getRoute(route), (err, res, body) => {
             if (err) return reject(err);
@@ -98,8 +92,8 @@ function post(route: string, formData?: any) {
 }
 
 function getRoute(route: string) {
-    var hasLeadingSlash = route.slice(0,1) === '/';
-    
+    var hasLeadingSlash = route.slice(0, 1) === '/';
+
     if (hasLeadingSlash) return base + route.slice(1);
-    return base + route; 
+    return base + route;
 }

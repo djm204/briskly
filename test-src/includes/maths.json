@@ -1,7 +1,7 @@
 {
     "maths/add": {
         "method": "POST",
-        "handler": "function (req, reply) { reply((+req.payload.left) + (+req.payload.right)); }"
+        "handler": "function (req, reply) { reply((+req.body.left) + (+req.body.right)); }"
     },
     "maths/sub/{left}/{right}": {
         "method": "GET",
