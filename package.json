@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "briskly-json": "^0.2.0",
+    "briskly-json": "^0.3.0",
     "briskly-router": "^0.9.4",
     "cajon": "^0.2.11",
     "knockout": "^3.3.0",
