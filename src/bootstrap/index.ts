@@ -6,8 +6,6 @@ import * as cfg from 'briskly-json';
 var bootstrapMarkup = '';
 
 function bootstrapMain() {
-
-
 	server.route({
 		path: '/',
 		method: 'GET',
