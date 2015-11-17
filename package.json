@@ -34,8 +34,7 @@
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "request": "^2.64.0",
-    "typescript": "^1.8.0-dev.20151115",
-    "webpack": "^1.12.3"
+    "typescript": "^1.8.0-dev.20151115"
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
