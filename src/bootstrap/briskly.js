@@ -11,4 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promi
         step("next", void 0);
     });
 };
+require.config({
+    baseUrl: '/scripts',
+    shim: {
+        'jquery': {
+            exports: 'jQuery'
+        }
+    }
+});
+require([]);
 //# sourceMappingURL=briskly.js.map
