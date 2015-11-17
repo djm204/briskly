@@ -40,7 +40,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "briskly-json": "^0.3.0",
-    "briskly-router": "^0.9.4",
+    "briskly-router": "^0.11.0",
     "cajon": "^0.2.11",
     "knockout": "^3.3.0",
     "ls-logger": "^0.2.1"
