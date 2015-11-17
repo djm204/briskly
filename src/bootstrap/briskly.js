@@ -11,32 +11,4 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promi
         step("next", void 0);
     });
 };
-var read_1 = require('../json/read');
-var BR = require('briskly-router');
-var port = read_1.default.port || 1337;
-exports.server = new BR.Router({ port: port });
-function start(port) {
-    return __awaiter(this, void 0, Promise, function* () {
-        try {
-            yield exports.server.start();
-            return true;
-        }
-        catch (ex) {
-            return false;
-        }
-    });
-}
-exports.start = start;
-function stop(timeout) {
-    return __awaiter(this, void 0, Promise, function* () {
-        try {
-            yield exports.server.stop();
-            return true;
-        }
-        catch (ex) {
-            return false;
-        }
-    });
-}
-exports.stop = stop;
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=briskly.js.map

@@ -37,27 +37,29 @@ function init() {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
         var json, webStart, result;
         return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) switch (_context.prev = _context.next) {
-                case 0:
-                    // Initial parsing of briskly.json
-                    json = require('./json/read');
-                    // Parse briskly.json routes
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        // Initial parsing of briskly.json
+                        json = require('./json/read');
+                        // Parse briskly.json routes
 
-                    routes_1.default();
-                    // Start the web server
-                    webStart = web.start();
-                    _context.next = 5;
-                    return webStart;
+                        routes_1.default();
+                        // Start the web server
+                        webStart = web.start();
+                        _context.next = 5;
+                        return webStart;
 
-                case 5:
-                    result = _context.sent;
+                    case 5:
+                        result = _context.sent;
 
-                    log.info('Web server started');
-                    return _context.abrupt("return", webStart);
+                        log.info('Web server started');
+                        return _context.abrupt("return", webStart);
 
-                case 8:
-                case "end":
-                    return _context.stop();
+                    case 8:
+                    case "end":
+                        return _context.stop();
+                }
             }
         }, _callee, this);
     }));

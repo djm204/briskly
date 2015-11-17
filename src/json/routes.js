@@ -73,7 +73,7 @@ function addFunctionRoute(route) {
         var evalFunc = eval(`(${route.handler})`);
         if (typeof evalFunc === 'function') {
             server_1.server.route({
-                method,
+                method: method,
                 path: route.path,
                 handler: evalFunc
             });
@@ -85,7 +85,7 @@ function addFunctionRoute(route) {
     try {
         var routeHandler = require(getHandlerPath(route));
         server_1.server.route({
-            method,
+            method: method,
             path: route.path,
             handler: routeHandler
         });

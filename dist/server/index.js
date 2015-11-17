@@ -36,23 +36,25 @@ exports.server = new BR.Router({ port: port });
 function start(port) {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) switch (_context.prev = _context.next) {
-                case 0:
-                    _context.prev = 0;
-                    _context.next = 3;
-                    return exports.server.start();
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        _context.prev = 0;
+                        _context.next = 3;
+                        return exports.server.start();
 
-                case 3:
-                    return _context.abrupt("return", true);
+                    case 3:
+                        return _context.abrupt("return", true);
 
-                case 6:
-                    _context.prev = 6;
-                    _context.t0 = _context["catch"](0);
-                    return _context.abrupt("return", false);
+                    case 6:
+                        _context.prev = 6;
+                        _context.t0 = _context["catch"](0);
+                        return _context.abrupt("return", false);
 
-                case 9:
-                case "end":
-                    return _context.stop();
+                    case 9:
+                    case "end":
+                        return _context.stop();
+                }
             }
         }, _callee, this, [[0, 6]]);
     }));
@@ -61,23 +63,25 @@ exports.start = start;
 function stop(timeout) {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) switch (_context2.prev = _context2.next) {
-                case 0:
-                    _context2.prev = 0;
-                    _context2.next = 3;
-                    return exports.server.stop();
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.prev = 0;
+                        _context2.next = 3;
+                        return exports.server.stop();
 
-                case 3:
-                    return _context2.abrupt("return", true);
+                    case 3:
+                        return _context2.abrupt("return", true);
 
-                case 6:
-                    _context2.prev = 6;
-                    _context2.t0 = _context2["catch"](0);
-                    return _context2.abrupt("return", false);
+                    case 6:
+                        _context2.prev = 6;
+                        _context2.t0 = _context2["catch"](0);
+                        return _context2.abrupt("return", false);
 
-                case 9:
-                case "end":
-                    return _context2.stop();
+                    case 9:
+                    case "end":
+                        return _context2.stop();
+                }
             }
         }, _callee2, this, [[0, 6]]);
     }));

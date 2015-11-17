@@ -53,20 +53,22 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee() {
             var started;
             return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) switch (_context.prev = _context.next) {
-                    case 0:
-                        _context.next = 2;
-                        return Briskly.init();
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.next = 2;
+                            return Briskly.init();
 
-                    case 2:
-                        started = _context.sent;
+                        case 2:
+                            started = _context.sent;
 
-                        expect(started).to.be.true;
-                        done();
+                            expect(started).to.be.true;
+                            done();
 
-                    case 5:
-                    case "end":
-                        return _context.stop();
+                        case 5:
+                        case "end":
+                            return _context.stop();
+                    }
                 }
             }, _callee, this);
         }));
@@ -75,20 +77,22 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
             var body;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                while (1) switch (_context2.prev = _context2.next) {
-                    case 0:
-                        _context2.next = 2;
-                        return get('five');
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            _context2.next = 2;
+                            return get('five');
 
-                    case 2:
-                        body = _context2.sent;
+                        case 2:
+                            body = _context2.sent;
 
-                        expect(body).to.equal('five');
-                        done();
+                            expect(body).to.equal('five');
+                            done();
 
-                    case 5:
-                    case "end":
-                        return _context2.stop();
+                        case 5:
+                        case "end":
+                            return _context2.stop();
+                    }
                 }
             }, _callee2, this);
         }));
@@ -97,20 +101,22 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee3() {
             var body;
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                while (1) switch (_context3.prev = _context3.next) {
-                    case 0:
-                        _context3.next = 2;
-                        return get('inline-five');
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            _context3.next = 2;
+                            return get('inline-five');
 
-                    case 2:
-                        body = _context3.sent;
+                        case 2:
+                            body = _context3.sent;
 
-                        expect(body).to.equal('five');
-                        done();
+                            expect(body).to.equal('five');
+                            done();
 
-                    case 5:
-                    case "end":
-                        return _context3.stop();
+                        case 5:
+                        case "end":
+                            return _context3.stop();
+                    }
                 }
             }, _callee3, this);
         }));
@@ -119,21 +125,23 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee4() {
             var values, body;
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                while (1) switch (_context4.prev = _context4.next) {
-                    case 0:
-                        values = { left: 2, right: 3 };
-                        _context4.next = 3;
-                        return post('maths/add', values);
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
+                            values = { left: 2, right: 3 };
+                            _context4.next = 3;
+                            return post('maths/add', values);
 
-                    case 3:
-                        body = _context4.sent;
+                        case 3:
+                            body = _context4.sent;
 
-                        expect(body).to.equal('5');
-                        done();
+                            expect(body).to.equal('5');
+                            done();
 
-                    case 6:
-                    case "end":
-                        return _context4.stop();
+                        case 6:
+                        case "end":
+                            return _context4.stop();
+                    }
                 }
             }, _callee4, this);
         }));
@@ -142,29 +150,31 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee5() {
             var body;
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                while (1) switch (_context5.prev = _context5.next) {
-                    case 0:
-                        _context5.prev = 0;
-                        _context5.next = 3;
-                        return get('maths/sub/12/6');
+                while (1) {
+                    switch (_context5.prev = _context5.next) {
+                        case 0:
+                            _context5.prev = 0;
+                            _context5.next = 3;
+                            return get('maths/sub/12/6');
 
-                    case 3:
-                        body = _context5.sent;
+                        case 3:
+                            body = _context5.sent;
 
-                        expect(body).to.equal('4');
-                        done();
-                        _context5.next = 11;
-                        break;
+                            expect(body).to.equal('4');
+                            done();
+                            _context5.next = 11;
+                            break;
 
-                    case 8:
-                        _context5.prev = 8;
-                        _context5.t0 = _context5["catch"](0);
+                        case 8:
+                            _context5.prev = 8;
+                            _context5.t0 = _context5["catch"](0);
 
-                        done(_context5.t0);
+                            done(_context5.t0);
 
-                    case 11:
-                    case "end":
-                        return _context5.stop();
+                        case 11:
+                        case "end":
+                            return _context5.stop();
+                    }
                 }
             }, _callee5, this, [[0, 8]]);
         }));
@@ -173,21 +183,23 @@ describe('web server and route tests', function () {
         return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee6() {
             var body, arr;
             return regeneratorRuntime.wrap(function _callee6$(_context6) {
-                while (1) switch (_context6.prev = _context6.next) {
-                    case 0:
-                        _context6.next = 2;
-                        return get('users');
+                while (1) {
+                    switch (_context6.prev = _context6.next) {
+                        case 0:
+                            _context6.next = 2;
+                            return get('users');
 
-                    case 2:
-                        body = _context6.sent;
-                        arr = JSON.parse(body);
+                        case 2:
+                            body = _context6.sent;
+                            arr = JSON.parse(body);
 
-                        expect(Array.isArray(arr)).to.be.true;
-                        done();
+                            expect(Array.isArray(arr)).to.be.true;
+                            done();
 
-                    case 6:
-                    case "end":
-                        return _context6.stop();
+                        case 6:
+                        case "end":
+                            return _context6.stop();
+                    }
                 }
             }, _callee6, this);
         }));

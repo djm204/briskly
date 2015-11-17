@@ -34,7 +34,7 @@ var log = require('ls-logger');
 var server_1 = require('../server');
 var path = require('path');
 var fs = require('fs');
-var workingDirectory = process.env.PWD;
+var workingDirectory = process.cwd();
 function parseRoutes() {
     if (!read_1.default.routes) {
         log.warn('No routes found in briskly.json');

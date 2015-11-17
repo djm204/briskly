@@ -13,8 +13,8 @@ function bootstrapMain() {
 			try {
 				var markup = await getMainMarkup();
 				var bootstrappedMarkup = markup + '\n' + bootstrapMarkup;
-				// TODO: Implement reply.view(...) in briskly-router
-				rep(bootstrappedMarkup);
+				
+				rep.html(bootstrappedMarkup);
 			}
 			catch (ex) {
 				rep(ex.message, 500);
