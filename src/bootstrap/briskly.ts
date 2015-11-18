@@ -1,4 +1,4 @@
-declare var require: any;
+var require: any;
 
 require.config({
 	baseUrl: '/scripts',
