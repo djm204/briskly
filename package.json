@@ -3,6 +3,9 @@
   "version": "0.1.1-pre",
   "description": "A lean framework for briskly developing web applications",
   "main": "src/index",
+  "bin":{
+    "briskly": "bin/index.js"
+  },
   "scripts": {
     "test": "mocha",
     "build": "tsc",
