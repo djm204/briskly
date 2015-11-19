@@ -1,6 +1,5 @@
-var require: any;
 
-require.config({
+(<any>require).config({
 	baseUrl: '/scripts',
 	shim: {
 		'jquery': {
@@ -9,4 +8,4 @@ require.config({
 	}	
 });
 
-require([/* what file here? */]);
+(<any>require)([/* what file here? */]);
