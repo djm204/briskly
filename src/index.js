@@ -22,10 +22,9 @@ function init() {
         // Parse briskly.json routes
         routes_1.default();
         // Start the web server
-        var webStart = web.start();
-        var result = yield webStart;
-        log.info('Web server started');
-        return webStart;
+        var started = yield web.start();
+        log.info(`Web server started on port ${web.server.port}`);
+        return started;
     });
 }
 exports.init = init;

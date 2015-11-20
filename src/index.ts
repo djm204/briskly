@@ -1,6 +1,7 @@
 import routeLoader from './json/routes';
 import * as web from './server';
 import * as log from 'ls-logger';
+import * as json from 'briskly-json';
 require('babel-polyfill');
 
 export async function init() {
@@ -11,9 +12,9 @@ export async function init() {
     routeLoader();
           
     // Start the web server
-    var webStart = web.start();
-    var result = await webStart;
-    log.info('Web server started');
+    var started = await web.start();
+    
+    log.info(`Web server started on port ${web.server.port}`);
        
-    return webStart;    
+    return started;    
 }
