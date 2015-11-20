@@ -1,5 +1,6 @@
+var briskly = require('../dist');
 function start() {
-    console.log('Do start thing');
+    var init = briskly.init();
 }
 exports.default = start;
 //# sourceMappingURL=start.js.map
