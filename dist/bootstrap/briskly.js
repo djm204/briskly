@@ -29,4 +29,13 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
         step("next", void 0);
     });
 };
+require.config({
+    baseUrl: '/scripts',
+    shim: {
+        'jquery': {
+            exports: 'jQuery'
+        }
+    }
+});
+require([]);
 //# sourceMappingURL=briskly.js.map

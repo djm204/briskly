@@ -35,7 +35,7 @@ var log = require('ls-logger');
 require('babel-polyfill');
 function init() {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
-        var json, webStart, result;
+        var json, started;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -46,17 +46,16 @@ function init() {
 
                         routes_1.default();
                         // Start the web server
-                        webStart = web.start();
-                        _context.next = 5;
-                        return webStart;
+                        _context.next = 4;
+                        return web.start();
 
-                    case 5:
-                        result = _context.sent;
+                    case 4:
+                        started = _context.sent;
 
-                        log.info('Web server started');
-                        return _context.abrupt("return", webStart);
+                        log.info("Web server started on port " + web.server.port);
+                        return _context.abrupt("return", started);
 
-                    case 8:
+                    case 7:
                     case "end":
                         return _context.stop();
                 }
