@@ -13,4 +13,3 @@ if (args['run']) {
 if (args['init']) {
     init.default();
 }
-//# sourceMappingURL=index.js.map
