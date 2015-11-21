@@ -15,23 +15,37 @@ var fs = require('fs');
 var path = require('path');
 var server_1 = require('../server');
 var cfg = require('briskly-json');
-var bootstrapMarkup = '';
+var log = require('ls-logger');
+function wrapUserMarkup(userMarkup) {
+    return `
+    <!DOCTYPE html>
+    <html>
+    ${userMarkup}
+    <script src="scripts/cajon.js" data-main="scripts/briskly.js"></script>
+    </html>
+    `;
+}
 function bootstrapMain() {
+    if (!cfg.json.hasOwnProperty('main')) {
+        log.warn('No "main" found in briskly.json');
+        return;
+    }
     server_1.server.route({
         path: '/',
         method: 'GET',
         handler: (req, rep) => __awaiter(this, void 0, Promise, function* () {
             try {
                 var markup = yield getMainMarkup();
-                var bootstrappedMarkup = markup + '\n' + bootstrapMarkup;
-                rep.html(bootstrappedMarkup);
+                rep.html(wrapUserMarkup(markup));
             }
             catch (ex) {
                 rep(ex.message, 500);
             }
         })
     });
+    log.info('/: Route added');
 }
+exports.default = bootstrapMain;
 function getMainMarkup() {
     return __awaiter(this, void 0, Promise, function* () {
         var main = cfg.json.main;
@@ -39,17 +53,6 @@ function getMainMarkup() {
         var mainPath = path.join(cwd, main);
         var mainMarkup = yield getFile(mainPath);
         return mainMarkup;
-    });
-}
-/**
- * Pre-optimization...
- * Cache the bootstrappd briskly markup
- */
-function getMarkup() {
-    return __awaiter(this, void 0, Promise, function* () {
-        var markupPath = path.join(__dirname, 'index.html');
-        var markup = yield getFile(markupPath);
-        return bootstrapMarkup = markup;
     });
 }
 function getFile(filepath) {

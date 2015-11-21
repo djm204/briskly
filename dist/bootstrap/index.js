@@ -33,16 +33,23 @@ var fs = require('fs');
 var path = require('path');
 var server_1 = require('../server');
 var cfg = require('briskly-json');
-var bootstrapMarkup = '';
+var log = require('ls-logger');
+function wrapUserMarkup(userMarkup) {
+    return "\n    <!DOCTYPE html>\n    <html>\n    " + userMarkup + "\n    <script src=\"scripts/cajon.js\" data-main=\"scripts/briskly.js\"></script>\n    </html>\n    ";
+}
 function bootstrapMain() {
     var _this = this;
 
+    if (!cfg.json.hasOwnProperty('main')) {
+        log.warn('No "main" found in briskly.json');
+        return;
+    }
     server_1.server.route({
         path: '/',
         method: 'GET',
         handler: function handler(req, rep) {
             return __awaiter(_this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
-                var markup, bootstrappedMarkup;
+                var markup;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
@@ -53,28 +60,29 @@ function bootstrapMain() {
 
                             case 3:
                                 markup = _context.sent;
-                                bootstrappedMarkup = markup + '\n' + bootstrapMarkup;
 
-                                rep.html(bootstrappedMarkup);
-                                _context.next = 11;
+                                rep.html(wrapUserMarkup(markup));
+                                _context.next = 10;
                                 break;
 
-                            case 8:
-                                _context.prev = 8;
+                            case 7:
+                                _context.prev = 7;
                                 _context.t0 = _context["catch"](0);
 
                                 rep(_context.t0.message, 500);
 
-                            case 11:
+                            case 10:
                             case "end":
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[0, 8]]);
+                }, _callee, this, [[0, 7]]);
             }));
         }
     });
+    log.info('/: Route added');
 }
+exports.default = bootstrapMain;
 function getMainMarkup() {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
         var main, cwd, mainPath, mainMarkup;
@@ -98,33 +106,6 @@ function getMainMarkup() {
                 }
             }
         }, _callee2, this);
-    }));
-}
-/**
- * Pre-optimization...
- * Cache the bootstrappd briskly markup
- */
-function getMarkup() {
-    return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee3() {
-        var markupPath, markup;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-            while (1) {
-                switch (_context3.prev = _context3.next) {
-                    case 0:
-                        markupPath = path.join(__dirname, 'index.html');
-                        _context3.next = 3;
-                        return getFile(markupPath);
-
-                    case 3:
-                        markup = _context3.sent;
-                        return _context3.abrupt("return", bootstrapMarkup = markup);
-
-                    case 5:
-                    case "end":
-                        return _context3.stop();
-                }
-            }
-        }, _callee3, this);
     }));
 }
 function getFile(filepath) {
