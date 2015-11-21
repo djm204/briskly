@@ -10,7 +10,7 @@
     "test": "mocha",
     "build": "tsc",
     "postbuild": "babel src --out-dir dist && babel test-src --out-dir test",
-    "start": "node dist/index"
+    "start": "node start.js"
   },
   "repository": {
     "type": "git",
