@@ -1,5 +1,6 @@
 {
     "port": 7331,
+    "main": "briskly.html",
     "routes": {
         "/five": {
             "method": "GET",
