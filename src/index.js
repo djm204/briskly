@@ -14,6 +14,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promi
 var routes_1 = require('./json/routes');
 var web = require('./server');
 var log = require('ls-logger');
+var defaultRoutes_1 = require('./server/defaultRoutes');
 require('babel-polyfill');
 function init() {
     return __awaiter(this, void 0, Promise, function* () {
@@ -21,6 +22,8 @@ function init() {
         var json = require('./json/read');
         // Parse briskly.json routes
         routes_1.default();
+        // Load briskly default routes
+        defaultRoutes_1.default();
         // Start the web server
         var started = yield web.start();
         log.info(`Web server started on port ${web.server.port}`);

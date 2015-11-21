@@ -32,6 +32,7 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 var routes_1 = require('./json/routes');
 var web = require('./server');
 var log = require('ls-logger');
+var defaultRoutes_1 = require('./server/defaultRoutes');
 require('babel-polyfill');
 function init() {
     return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
@@ -45,17 +46,19 @@ function init() {
                         // Parse briskly.json routes
 
                         routes_1.default();
+                        // Load briskly default routes
+                        defaultRoutes_1.default();
                         // Start the web server
-                        _context.next = 4;
+                        _context.next = 5;
                         return web.start();
 
-                    case 4:
+                    case 5:
                         started = _context.sent;
 
                         log.info("Web server started on port " + web.server.port);
                         return _context.abrupt("return", started);
 
-                    case 7:
+                    case 8:
                     case "end":
                         return _context.stop();
                 }
