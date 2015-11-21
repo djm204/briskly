@@ -10,9 +10,15 @@ function wrapUserMarkup(userMarkup: string) {
     <!DOCTYPE html>
     <html>
     ${userMarkup}
+    ${getUserScript()}
     <script src="scripts/cajon.js" data-main="scripts/briskly.js"></script>
     </html>
     `
+}
+
+function getUserScript() {
+    if (!cfg.json.hasOwnProperty('script')) return '';
+    return `<script src="${cfg.json.script}"></script>`;
 }
     
 

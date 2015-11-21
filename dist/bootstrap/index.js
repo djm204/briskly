@@ -35,7 +35,11 @@ var server_1 = require('../server');
 var cfg = require('briskly-json');
 var log = require('ls-logger');
 function wrapUserMarkup(userMarkup) {
-    return "\n    <!DOCTYPE html>\n    <html>\n    " + userMarkup + "\n    <script src=\"scripts/cajon.js\" data-main=\"scripts/briskly.js\"></script>\n    </html>\n    ";
+    return "\n    <!DOCTYPE html>\n    <html>\n    " + userMarkup + "\n    " + getUserScript() + "\n    <script src=\"scripts/cajon.js\" data-main=\"scripts/briskly.js\"></script>\n    </html>\n    ";
+}
+function getUserScript() {
+    if (!cfg.json.hasOwnProperty('script')) return '';
+    return "<script src=\"" + cfg.json.script + "\"></script>";
 }
 function bootstrapMain() {
     var _this = this;
