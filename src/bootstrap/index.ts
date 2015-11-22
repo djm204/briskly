@@ -18,7 +18,16 @@ function wrapUserMarkup(userMarkup: string) {
 
 function getUserScript() {
     if (!cfg.json.hasOwnProperty('script')) return '';
-    return `<script src="${cfg.json.script}"></script>`;
+	
+	server.route({
+		path: 'scripts/main.js',
+		method: 'GET',
+		handler: {
+			file: path.join(process.cwd(), cfg.json.script)
+		}
+	});
+	
+    return `<script src="scripts/main.js"></script>`;
 }
     
 
