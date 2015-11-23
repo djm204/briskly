@@ -37,5 +37,10 @@ require.config({
         }
     }
 });
-require([]);
+var customerLoader = {
+    loadTemplate: function loadTemplate(name, config, callback) {}
+};
+require(['knockout'], function (ko) {
+    ko.components.loaders.unshift(customerLoader);
+});
 //# sourceMappingURL=briskly.js.map

@@ -1,4 +1,3 @@
-
 (<any>require).config({
 	baseUrl: '/scripts',
 	shim: {
@@ -8,4 +7,12 @@
 	}	
 });
 
-(<any>require)([/* what file here? */]);
+var customerLoader = {
+	loadTemplate: (name: string, config: any, callback: any) => {
+		
+	}
+};
+
+(<any>require)(['knockout'], (ko: KnockoutStatic) => {
+	ko.components.loaders.unshift(customerLoader);
+});
