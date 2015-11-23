@@ -36,7 +36,7 @@
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "request": "^2.64.0",
-    "typescript": "^1.8.0-dev.20151115"
+    "typescript": "^1.8.0-dev.20151123"
   },
   "dependencies": {
     "babel-polyfill": "^6.0.16",
