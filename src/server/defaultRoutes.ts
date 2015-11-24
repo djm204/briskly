@@ -11,6 +11,7 @@ var bootstrapJs = path.resolve(root, 'boostrap/dist/js/bootstrap.min.js');
 var bootstrapCss = path.resolve(root, 'boostrap/dist/css/bootstrap.min.css');
 var knockout = path.resolve(root, 'knockout/build/output/knockout-latest.js');
 var cajon = path.resolve(root, 'cajon/cajon.js');
+var jquery = path.resolve(root, 'jquery/dist/jquery.min.js');
 var briskly = path.resolve(brisklyRoot, 'src/bootstrap/briskly.js');
 
 function loadRoutes() {
@@ -19,6 +20,6 @@ function loadRoutes() {
     route.get('/scripts/knockout.js', (request, reply) => reply.file(knockout));
     route.get('/scripts/cajon.js', (request, reply) => reply.file(cajon));
     route.get('/scripts/briskly.js', (request, reply) => reply.file(briskly));
-
+    route.get('/scripts/jquery.js', (request, reply) => reply.file(jquery));
     brisklyBootstrapper();    
 }
