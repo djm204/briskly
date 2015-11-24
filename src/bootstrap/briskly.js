@@ -19,11 +19,11 @@ require.config({
         }
     }
 });
-var customerLoader = {
-    loadTemplate: (name, config, callback) => {
-    }
-};
-require(['knockout'], (ko) => {
+require(['knockout', 'jquery'], (ko, $) => {
+    var customerLoader = {
+        loadTemplate: (name, config, callback) => {
+        }
+    };
     ko.components.loaders.unshift(customerLoader);
 });
 //# sourceMappingURL=briskly.js.map

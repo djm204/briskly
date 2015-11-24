@@ -4,15 +4,16 @@
 		'jquery': {
 			exports: 'jQuery'
 		}
-	}	
+	}
 });
 
-var customerLoader = {
-	loadTemplate: (name: string, config: any, callback: any) => {
-		
-	}
-};
+(<any>require)(['knockout', 'jquery'], (ko: KnockoutStatic, $: JQueryStatic) => {
+	var customerLoader = {
+		loadTemplate: (name: string, config: any, callback: any) => {
+			
+		}
+	};
 
-(<any>require)(['knockout'], (ko: KnockoutStatic) => {
 	ko.components.loaders.unshift(customerLoader);
+
 });

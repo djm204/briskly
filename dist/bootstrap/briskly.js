@@ -37,10 +37,10 @@ require.config({
         }
     }
 });
-var customerLoader = {
-    loadTemplate: function loadTemplate(name, config, callback) {}
-};
-require(['knockout'], function (ko) {
+require(['knockout', 'jquery'], function (ko, $) {
+    var customerLoader = {
+        loadTemplate: function loadTemplate(name, config, callback) {}
+    };
     ko.components.loaders.unshift(customerLoader);
 });
 //# sourceMappingURL=briskly.js.map
