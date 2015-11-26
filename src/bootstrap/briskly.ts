@@ -10,14 +10,13 @@
 (<any>require)(['knockout', 'jquery'], (ko: KnockoutStatic, $: JQueryStatic) => {
 	var customerLoader = {
 		getConfig: (name: string, callback: (component: { viewModel: any, template: any }) => void) => {
-			// Get the template markup
-		 	var template = $.get(`/components/${name}.html`);
+			// Retrieve the template markup and viewModel constructor asynchronously 
+		 	var templateRequest = $.get(`/components/${name}.html`);
 			 
-			// Get the viewModel constructor
-			var viewModel = (<any>require)(`../components/${name}`);
+			(<any>require)(`../components/${name}`, viewModel => {
+				templateRequest.then(template => callback({ viewModel, template }));
+			});
 			
-			
-			callback({ viewModel: null, template: null });
 		}
 	};
 

@@ -39,7 +39,15 @@ require.config({
 });
 require(['knockout', 'jquery'], function (ko, $) {
     var customerLoader = {
-        loadTemplate: function loadTemplate(name, config, callback) {}
+        getConfig: function getConfig(name, callback) {
+            // Retrieve the template markup and viewModel constructor asynchronously
+            var templateRequest = $.get("/components/" + name + ".html");
+            require("../components/" + name, function (viewModel) {
+                templateRequest.then(function (template) {
+                    return callback({ viewModel: viewModel, template: template });
+                });
+            });
+        }
     };
     ko.components.loaders.unshift(customerLoader);
 });
