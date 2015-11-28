@@ -11,4 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promi
         step("next", void 0);
     });
 };
+var briskly_json_1 = require('briskly-json');
+for (var component in briskly_json_1.json.components) {
+    console.log(component);
+}
 //# sourceMappingURL=components.js.map

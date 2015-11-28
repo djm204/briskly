@@ -21,5 +21,4 @@
 	};
 
 	ko.components.loaders.unshift(customerLoader);
-
 });
