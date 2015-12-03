@@ -1,2 +1,3 @@
-var briskly = require('./dist');
+var briskly = require('./src');
 briskly.init();
+//# sourceMappingURL=start.js.map
