@@ -42,7 +42,7 @@
     "babel-polyfill": "^6.0.16",
     "bootstrap": "^3.3.5",
     "briskly-json": "^0.4.0",
-    "briskly-router": "^0.11.1",
+    "briskly-router": "^0.11.2",
     "cajon": "^0.2.11",
     "jquery": "^2.1.4",
     "knockout": "^3.3.0",
