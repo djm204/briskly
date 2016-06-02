@@ -1,3 +1,4 @@
+"use strict";
 var briskly = require('../dist');
 function start() {
     var init = briskly.init();

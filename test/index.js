@@ -1,34 +1,29 @@
 "use strict";
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
             try {
-                step("next", value);
+                step(generator.next(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function onreject(value) {
+        function rejected(value) {
             try {
-                step("throw", value);
+                step(generator.throw(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
         }
-        step("next", void 0);
+        step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
 var Briskly = require('../src');
@@ -50,7 +45,7 @@ describe('json parsing tests', function () {
 });
 describe('web server and route tests', function () {
     it('will start the web server', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee() {
             var started;
             return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -66,7 +61,7 @@ describe('web server and route tests', function () {
                             done();
 
                         case 5:
-                        case "end":
+                        case 'end':
                             return _context.stop();
                     }
                 }
@@ -74,7 +69,7 @@ describe('web server and route tests', function () {
         }));
     });
     it('will a load a typical route', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee2() {
             var body;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
@@ -90,7 +85,7 @@ describe('web server and route tests', function () {
                             done();
 
                         case 5:
-                        case "end":
+                        case 'end':
                             return _context2.stop();
                     }
                 }
@@ -98,7 +93,7 @@ describe('web server and route tests', function () {
         }));
     });
     it('will load an inline-handler route', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee3() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee3() {
             var body;
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
                 while (1) {
@@ -114,7 +109,7 @@ describe('web server and route tests', function () {
                             done();
 
                         case 5:
-                        case "end":
+                        case 'end':
                             return _context3.stop();
                     }
                 }
@@ -122,7 +117,7 @@ describe('web server and route tests', function () {
         }));
     });
     it('will load an included route that expects a form body', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee4() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee4() {
             var values, body;
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
@@ -139,7 +134,7 @@ describe('web server and route tests', function () {
                             done();
 
                         case 6:
-                        case "end":
+                        case 'end':
                             return _context4.stop();
                     }
                 }
@@ -147,7 +142,7 @@ describe('web server and route tests', function () {
         }));
     });
     it('will load an included route that takes query parameters', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee5() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee5() {
             var body;
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
                 while (1) {
@@ -167,12 +162,12 @@ describe('web server and route tests', function () {
 
                         case 8:
                             _context5.prev = 8;
-                            _context5.t0 = _context5["catch"](0);
+                            _context5.t0 = _context5['catch'](0);
 
                             done(_context5.t0);
 
                         case 11:
-                        case "end":
+                        case 'end':
                             return _context5.stop();
                     }
                 }
@@ -180,7 +175,7 @@ describe('web server and route tests', function () {
         }));
     });
     it('will load an included route that loads a module', function (done) {
-        return __awaiter(undefined, void 0, Promise, regeneratorRuntime.mark(function _callee6() {
+        return __awaiter(undefined, void 0, void 0, regeneratorRuntime.mark(function _callee6() {
             var body, arr;
             return regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
@@ -197,7 +192,7 @@ describe('web server and route tests', function () {
                             done();
 
                         case 6:
-                        case "end":
+                        case 'end':
                             return _context6.stop();
                     }
                 }

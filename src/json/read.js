@@ -1,7 +1,8 @@
-var Cfg = require('briskly-json');
-var fs = require('fs');
-var path = require('path');
-var logger = require('ls-logger');
+"use strict";
+const Cfg = require('briskly-json');
+const fs = require('fs');
+const path = require('path');
+const logger = require('ls-logger');
 var brisklyJson = Cfg.json;
 exports.default = brisklyJson;
 shimIncludes();

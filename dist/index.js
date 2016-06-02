@@ -1,41 +1,36 @@
 "use strict";
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
             try {
-                step("next", value);
+                step(generator.next(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function onreject(value) {
+        function rejected(value) {
             try {
-                step("throw", value);
+                step(generator.throw(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
         }
-        step("next", void 0);
+        step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
+require("babel-polyfill");
 var routes_1 = require('./json/routes');
 var web = require('./server');
 var log = require('ls-logger');
 var defaultRoutes_1 = require('./server/defaultRoutes');
-require('babel-polyfill');
 function init() {
-    return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
+    return __awaiter(this, void 0, void 0, regeneratorRuntime.mark(function _callee() {
         var json, started;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {

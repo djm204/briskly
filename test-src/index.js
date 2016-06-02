@@ -1,20 +1,16 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) { return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) { resolve(value); }); }
-        function onfulfill(value) { try { step("next", value); } catch (e) { reject(e); } }
-        function onreject(value) { try { step("throw", value); } catch (e) { reject(e); } }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
-        }
-        step("next", void 0);
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-var Briskly = require('../src');
-var chai = require('chai');
-var req = require('request');
-var read_1 = require('../src/json/read');
+const Briskly = require('../src');
+const chai = require('chai');
+const req = require('request');
+const read_1 = require('../src/json/read');
 var expect = chai.expect;
 describe('json parsing tests', () => {
     it('will parse briskly.json', () => {
@@ -29,28 +25,28 @@ describe('json parsing tests', () => {
     });
 });
 describe('web server and route tests', () => {
-    it('will start the web server', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will start the web server', (done) => __awaiter(this, void 0, void 0, function* () {
         var started = yield Briskly.init();
         expect(started).to.be.true;
         done();
     }));
-    it('will a load a typical route', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will a load a typical route', (done) => __awaiter(this, void 0, void 0, function* () {
         var body = yield get('five');
         expect(body).to.equal('five');
         done();
     }));
-    it('will load an inline-handler route', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will load an inline-handler route', (done) => __awaiter(this, void 0, void 0, function* () {
         var body = yield get('inline-five');
         expect(body).to.equal('five');
         done();
     }));
-    it('will load an included route that expects a form body', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will load an included route that expects a form body', (done) => __awaiter(this, void 0, void 0, function* () {
         var values = { left: 2, right: 3 };
         var body = yield post('maths/add', values);
         expect(body).to.equal('5');
         done();
     }));
-    it('will load an included route that takes query parameters', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will load an included route that takes query parameters', (done) => __awaiter(this, void 0, void 0, function* () {
         try {
             var body = yield get('maths/sub/12/6');
             expect(body).to.equal('4');
@@ -60,7 +56,7 @@ describe('web server and route tests', () => {
             done(ex);
         }
     }));
-    it('will load an included route that loads a module', (done) => __awaiter(this, void 0, Promise, function* () {
+    it('will load an included route that loads a module', (done) => __awaiter(this, void 0, void 0, function* () {
         var body = yield get('users');
         var arr = JSON.parse(body);
         expect(Array.isArray(arr)).to.be.true;

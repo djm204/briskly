@@ -1,32 +1,27 @@
 "use strict";
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
             try {
-                step("next", value);
+                step(generator.next(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function onreject(value) {
+        function rejected(value) {
             try {
-                step("throw", value);
+                step(generator.throw(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
         }
-        step("next", void 0);
+        step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
 var read_1 = require('../json/read');
@@ -34,7 +29,7 @@ var BR = require('briskly-router');
 var port = read_1.default.port || 1337;
 exports.server = new BR.Router({ port: port });
 function start(port) {
-    return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
+    return __awaiter(this, void 0, void 0, regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -44,15 +39,15 @@ function start(port) {
                         return exports.server.start();
 
                     case 3:
-                        return _context.abrupt("return", true);
+                        return _context.abrupt('return', true);
 
                     case 6:
                         _context.prev = 6;
-                        _context.t0 = _context["catch"](0);
-                        return _context.abrupt("return", false);
+                        _context.t0 = _context['catch'](0);
+                        return _context.abrupt('return', false);
 
                     case 9:
-                    case "end":
+                    case 'end':
                         return _context.stop();
                 }
             }
@@ -61,7 +56,7 @@ function start(port) {
 }
 exports.start = start;
 function stop(timeout) {
-    return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
+    return __awaiter(this, void 0, void 0, regeneratorRuntime.mark(function _callee2() {
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
@@ -71,15 +66,15 @@ function stop(timeout) {
                         return exports.server.stop();
 
                     case 3:
-                        return _context2.abrupt("return", true);
+                        return _context2.abrupt('return', true);
 
                     case 6:
                         _context2.prev = 6;
-                        _context2.t0 = _context2["catch"](0);
-                        return _context2.abrupt("return", false);
+                        _context2.t0 = _context2['catch'](0);
+                        return _context2.abrupt('return', false);
 
                     case 9:
-                    case "end":
+                    case 'end':
                         return _context2.stop();
                 }
             }

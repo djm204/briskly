@@ -1,32 +1,27 @@
 "use strict";
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) {
             try {
-                step("next", value);
+                step(generator.next(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function onreject(value) {
+        function rejected(value) {
             try {
-                step("throw", value);
+                step(generator.throw(value));
             } catch (e) {
                 reject(e);
             }
         }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
+        function step(result) {
+            result.done ? resolve(result.value) : new P(function (resolve) {
+                resolve(result.value);
+            }).then(fulfilled, rejected);
         }
-        step("next", void 0);
+        step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
 var fs = require('fs');
@@ -35,7 +30,7 @@ var server_1 = require('../server');
 var cfg = require('briskly-json');
 var log = require('ls-logger');
 function wrapUserMarkup(userMarkup) {
-    return "\n    <!DOCTYPE html>\n    <html>\n    " + userMarkup + "\n    " + getUserScript() + "\n    <script src=\"scripts/cajon.js\" data-main=\"scripts/briskly.js\"></script>\n    </html>\n    ";
+    return '\n    <!DOCTYPE html>\n    <html>\n    ' + userMarkup + '\n    ' + getUserScript() + '\n    <script src="scripts/cajon.js" data-main="scripts/briskly.js"></script>\n    </html>\n    ';
 }
 function getUserScript() {
     if (!cfg.json.hasOwnProperty('script')) return '';
@@ -46,7 +41,7 @@ function getUserScript() {
             file: path.join(process.cwd(), cfg.json.script)
         }
     });
-    return "<script src=\"scripts/main.js\"></script>";
+    return '<script src="scripts/main.js"></script>';
 }
 function bootstrapMain() {
     var _this = this;
@@ -59,7 +54,7 @@ function bootstrapMain() {
         path: '/',
         method: 'GET',
         handler: function handler(req, rep) {
-            return __awaiter(_this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
+            return __awaiter(_this, void 0, void 0, regeneratorRuntime.mark(function _callee() {
                 var markup;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
@@ -78,12 +73,12 @@ function bootstrapMain() {
 
                             case 7:
                                 _context.prev = 7;
-                                _context.t0 = _context["catch"](0);
+                                _context.t0 = _context['catch'](0);
 
                                 rep(_context.t0.message, 500);
 
                             case 10:
-                            case "end":
+                            case 'end':
                                 return _context.stop();
                         }
                     }
@@ -95,7 +90,7 @@ function bootstrapMain() {
 }
 exports.default = bootstrapMain;
 function getMainMarkup() {
-    return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
+    return __awaiter(this, void 0, void 0, regeneratorRuntime.mark(function _callee2() {
         var main, cwd, mainPath, mainMarkup;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
@@ -109,10 +104,10 @@ function getMainMarkup() {
 
                     case 5:
                         mainMarkup = _context2.sent;
-                        return _context2.abrupt("return", mainMarkup);
+                        return _context2.abrupt('return', mainMarkup);
 
                     case 7:
-                    case "end":
+                    case 'end':
                         return _context2.stop();
                 }
             }

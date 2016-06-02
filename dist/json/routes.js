@@ -1,34 +1,5 @@
 "use strict";
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
-            try {
-                step("next", value);
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function onreject(value) {
-            try {
-                step("throw", value);
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
-        }
-        step("next", void 0);
-    });
-};
 var read_1 = require('./read');
 var log = require('ls-logger');
 var server_1 = require('../server');
@@ -44,13 +15,13 @@ function parseRoutes() {
         var route = read_1.default.routes[routePath];
         if (routePath.toLowerCase() === 'include') continue;
         var firstCharIsSlash = routePath.slice(0, 1) === '/';
-        route.path = "" + (firstCharIsSlash ? '' : '/') + routePath;
+        route.path = '' + (firstCharIsSlash ? '' : '/') + routePath;
         if (!route.method) {
-            log.warn(routePath + ": No method found. Route ignored.");
+            log.warn(routePath + ': No method found. Route ignored.');
             continue;
         }
         if (!route.handler) {
-            log.warn(routePath + ": No handler found. Route ignored.");
+            log.warn(routePath + ': No handler found. Route ignored.');
             continue;
         }
         switch (getHandlerType(route)) {
@@ -65,7 +36,7 @@ function parseRoutes() {
                 break;
             default:
                 {
-                    log.error(routePath + ": Unable to determine route handler type. Route ignored.");
+                    log.error(routePath + ': Unable to determine route handler type. Route ignored.');
                     // TODO
                     break;
                 }
@@ -75,7 +46,7 @@ function parseRoutes() {
 exports.default = parseRoutes;
 function addFunctionRoute(route) {
     if (!isValidFunctionRoute(route)) {
-        log.warn(route.path + ": Handler is not a function. Route ignored.");
+        log.warn(route.path + ': Handler is not a function. Route ignored.');
         return;
     }
     var method = route.method.toUpperCase();
@@ -88,14 +59,14 @@ function addFunctionRoute(route) {
          *
          * However, this is fairly insane.
          */
-        var evalFunc = eval("(" + route.handler + ")");
+        var evalFunc = eval('(' + route.handler + ')');
         if (typeof evalFunc === 'function') {
             server_1.server.route({
                 method: method,
                 path: route.path,
                 handler: evalFunc
             });
-            log.info(route.path + ": Route added");
+            log.info(route.path + ': Route added');
             return;
         }
     } catch (ex) {} // Couldn't eval the function. We're not too fussed here. It was worth a shot.     
@@ -106,9 +77,9 @@ function addFunctionRoute(route) {
             path: route.path,
             handler: routeHandler
         });
-        log.info(route.path + ": Route added");
+        log.info(route.path + ': Route added');
     } catch (ex) {
-        log.error(route.path + ": Unable to load function route handler. Route ignored.");
+        log.error(route.path + ': Unable to load function route handler. Route ignored.');
     }
 }
 function addFileRoute(route) {
@@ -120,7 +91,7 @@ function addFileRoute(route) {
             return reply.file(handlerPath);
         }
     });
-    log.info(route.path + ": File route added");
+    log.info(route.path + ': File route added');
 }
 function addDirectoryRoute(route) {
     var handlerPath = getHandlerPath(route);
@@ -131,7 +102,7 @@ function addDirectoryRoute(route) {
             directory: handlerPath
         }
     });
-    log.info(route.path + ": Directory route added");
+    log.info(route.path + ': Directory route added');
 }
 function getHandlerPath(route) {
     var handlerPath = path.resolve(path.join(workingDirectory, route.handler));
@@ -139,7 +110,7 @@ function getHandlerPath(route) {
 }
 function isValidFunctionRoute(route) {
     try {
-        var evalFunc = eval("(" + route.handler + ")");
+        var evalFunc = eval('(' + route.handler + ')');
         if (typeof evalFunc === 'function') return true;
     } catch (ex) {}
     var routeHandler = require(getHandlerPath(route));

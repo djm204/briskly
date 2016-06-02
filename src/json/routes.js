@@ -1,21 +1,9 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) { return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) { resolve(value); }); }
-        function onfulfill(value) { try { step("next", value); } catch (e) { reject(e); } }
-        function onreject(value) { try { step("throw", value); } catch (e) { reject(e); } }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
-        }
-        step("next", void 0);
-    });
-};
-var read_1 = require('./read');
-var log = require('ls-logger');
-var server_1 = require('../server');
-var path = require('path');
-var fs = require('fs');
+"use strict";
+const read_1 = require('./read');
+const log = require('ls-logger');
+const server_1 = require('../server');
+const path = require('path');
+const fs = require('fs');
 var workingDirectory = process.cwd();
 function parseRoutes() {
     if (!read_1.default.routes) {

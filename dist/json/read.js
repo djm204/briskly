@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var Cfg = require('briskly-json');
 var fs = require('fs');

@@ -1,34 +1,5 @@
-"use strict";
+'use strict';
 
-var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, Promise, generator) {
-    return new Promise(function (resolve, reject) {
-        generator = generator.call(thisArg, _arguments);
-        function cast(value) {
-            return value instanceof Promise && value.constructor === Promise ? value : new Promise(function (resolve) {
-                resolve(value);
-            });
-        }
-        function onfulfill(value) {
-            try {
-                step("next", value);
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function onreject(value) {
-            try {
-                step("throw", value);
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(verb, value) {
-            var result = generator[verb](value);
-            result.done ? resolve(result.value) : cast(result.value).then(onfulfill, onreject);
-        }
-        step("next", void 0);
-    });
-};
 require.config({
     baseUrl: '/scripts',
     shim: {
@@ -41,8 +12,8 @@ require(['knockout', 'jquery'], function (ko, $) {
     var customerLoader = {
         getConfig: function getConfig(name, callback) {
             // Retrieve the template markup and viewModel constructor asynchronously
-            var templateRequest = $.get("/components/" + name + ".html");
-            require("../components/" + name, function (viewModel) {
+            var templateRequest = $.get('/components/' + name + '.html');
+            require('../components/' + name, function (viewModel) {
                 templateRequest.then(function (template) {
                     return callback({ viewModel: viewModel, template: template });
                 });
