@@ -1,10 +1,9 @@
+import "babel-polyfill";
 import routeLoader from './json/routes';
 import * as web from './server';
 import * as log from 'ls-logger';
 import * as json from 'briskly-json';
 import loadDefaultRoutes from './server/defaultRoutes';
-
-require('babel-polyfill');
 
 export async function init() {
     // Initial parsing of briskly.json
