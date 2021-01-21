@@ -3,10 +3,14 @@
   "version": "0.1.1-pre",
   "description": "A lean framework for briskly developing web applications",
   "main": "src/index",
+  "bin": {
+    "briskly": "bin/index.js"
+  },
   "scripts": {
     "test": "mocha",
     "build": "tsc",
-    "start": "node src/index"
+    "postbuild": "babel src --out-dir dist && babel test-src --out-dir test",
+    "start": "node start.js"
   },
   "repository": {
     "type": "git",
@@ -25,18 +29,23 @@
   },
   "homepage": "https://github.com/seikho/briskly#readme",
   "devDependencies": {
+    "babel": "^6.0.15",
+    "babel-cli": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-stage-0": "^6.1.2",
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "request": "^2.64.0",
-    "typescript": "^1.6.2"
+    "typescript": "^1.8.0-dev.20151123"
   },
   "dependencies": {
-    "bootstrap": "^3.3.5",
-    "briskly-json": "^0.1.1",
+    "babel-polyfill": "^6.0.16",
+    "briskly-json": "^0.4.0",
+    "briskly-router": "^0.11.2",
     "cajon": "^0.2.11",
-    "hapi": "^10.0.1",
-    "inert": "^3.0.1",
+    "jquery": "^2.1.4",
     "knockout": "^3.3.0",
-    "ls-logger": "^0.2.1"
+    "ls-logger": "^0.2.1",
+    "minimist": "^1.2.0"
   }
 }

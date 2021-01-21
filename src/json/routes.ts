@@ -1,12 +1,12 @@
-import Cfg = require('briskly-json');
-import json = require('./read');
-import log = require('ls-logger');
+import * as Cfg from 'briskly-json';
+import json from './read';
+import * as log from 'ls-logger';
 import { server } from '../server';
-import path = require('path');
-import fs = require('fs');
-export = parseRoutes;
+import * as path from 'path';
+import * as fs from 'fs';
+export { parseRoutes as default };
 
-var workingDirectory = process.env.PWD;
+var workingDirectory = process.cwd();
 
 function parseRoutes() {
     if (!json.routes) {
@@ -67,8 +67,9 @@ function addFunctionRoute(route: Cfg.Route) {
          * handler: function(request, reply) { reply(request.payload.left + request.payload.right); }
          * 
          * However, this is fairly insane.
-         * */
+         */
         var evalFunc = eval(`(${route.handler})`);
+        
         if (typeof evalFunc === 'function') {
             server.route({
                 method,
@@ -113,11 +114,9 @@ function addDirectoryRoute(route: Cfg.Route) {
 
     server.route({
         method: route.method.toUpperCase(),
-        path: route.path + '/{param*}',
+        path: route.path + '/{...}',
         handler: {
-            directory: {
-                path: handlerPath
-            }
+            directory: handlerPath
         }
     });
 

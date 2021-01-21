@@ -1,4 +1,5 @@
-var server_1 = require('../server');
+"use strict";
+const server_1 = require('../server');
 function get(route, handler) {
     server_1.server.route({
         method: 'GET',

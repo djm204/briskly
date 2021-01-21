@@ -1,7 +1,7 @@
-import Hapi = require('hapi');
 import { server } from '../server';
+import * as BR from 'briskly-router';
 
-export function get(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFailFunction) {
+export function get(route: string, handler: BR.RouteHandler) {
     server.route({
         method: 'GET',
         path: route,
@@ -9,7 +9,7 @@ export function get(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFa
     });
 }
 
-export function post(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFailFunction) {
+export function post(route: string, handler: BR.RouteHandler) {
     server.route({
         method: 'POST',
         path: route,
@@ -17,7 +17,7 @@ export function post(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteF
     });
 }
 
-export function put(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFailFunction) {
+export function put(route: string, handler: BR.RouteHandler) {
     server.route({
         method: 'PUT',
         path: route,
@@ -25,7 +25,7 @@ export function put(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFa
     });
 }
 
-export function del(route: string, handler: Hapi.ISessionHandler | Hapi.IRouteFailFunction) {
+export function del(route: string, handler: BR.RouteHandler) {
     server.route({
         method: 'DELETE',
         path: route,

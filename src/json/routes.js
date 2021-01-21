@@ -1,26 +1,27 @@
-var json = require('./read');
-var log = require('ls-logger');
-var server_1 = require('../server');
-var path = require('path');
-var fs = require('fs');
-var workingDirectory = process.env.PWD;
+"use strict";
+const read_1 = require('./read');
+const log = require('ls-logger');
+const server_1 = require('../server');
+const path = require('path');
+const fs = require('fs');
+var workingDirectory = process.cwd();
 function parseRoutes() {
-    if (!json.routes) {
+    if (!read_1.default.routes) {
         log.warn('No routes found in briskly.json');
         return;
     }
-    for (var routePath in json.routes) {
-        var route = json.routes[routePath];
+    for (var routePath in read_1.default.routes) {
+        var route = read_1.default.routes[routePath];
         if (routePath.toLowerCase() === 'include')
             continue;
         var firstCharIsSlash = routePath.slice(0, 1) === '/';
-        route.path = "" + (firstCharIsSlash ? '' : '/') + routePath;
+        route.path = `${firstCharIsSlash ? '' : '/'}${routePath}`;
         if (!route.method) {
-            log.warn(routePath + ": No method found. Route ignored.");
+            log.warn(`${routePath}: No method found. Route ignored.`);
             continue;
         }
         if (!route.handler) {
-            log.warn(routePath + ": No handler found. Route ignored.");
+            log.warn(`${routePath}: No handler found. Route ignored.`);
             continue;
         }
         switch (getHandlerType(route)) {
@@ -34,16 +35,17 @@ function parseRoutes() {
                 addDirectoryRoute(route);
                 break;
             default: {
-                log.error(routePath + ": Unable to determine route handler type. Route ignored.");
+                log.error(`${routePath}: Unable to determine route handler type. Route ignored.`);
                 // TODO
                 break;
             }
         }
     }
 }
+exports.default = parseRoutes;
 function addFunctionRoute(route) {
     if (!isValidFunctionRoute(route)) {
-        log.warn(route.path + ": Handler is not a function. Route ignored.");
+        log.warn(`${route.path}: Handler is not a function. Route ignored.`);
         return;
     }
     var method = route.method.toUpperCase();
@@ -55,15 +57,15 @@ function addFunctionRoute(route) {
          * handler: function(request, reply) { reply(request.payload.left + request.payload.right); }
          *
          * However, this is fairly insane.
-         * */
-        var evalFunc = eval("(" + route.handler + ")");
+         */
+        var evalFunc = eval(`(${route.handler})`);
         if (typeof evalFunc === 'function') {
             server_1.server.route({
                 method: method,
                 path: route.path,
                 handler: evalFunc
             });
-            log.info(route.path + ": Route added");
+            log.info(`${route.path}: Route added`);
             return;
         }
     }
@@ -75,10 +77,10 @@ function addFunctionRoute(route) {
             path: route.path,
             handler: routeHandler
         });
-        log.info(route.path + ": Route added");
+        log.info(`${route.path}: Route added`);
     }
     catch (ex) {
-        log.error(route.path + ": Unable to load function route handler. Route ignored.");
+        log.error(`${route.path}: Unable to load function route handler. Route ignored.`);
     }
 }
 function addFileRoute(route) {
@@ -86,22 +88,20 @@ function addFileRoute(route) {
     server_1.server.route({
         method: route.method.toUpperCase(),
         path: route.path,
-        handler: function (request, reply) { return reply.file(handlerPath); }
+        handler: (request, reply) => reply.file(handlerPath)
     });
-    log.info(route.path + ": File route added");
+    log.info(`${route.path}: File route added`);
 }
 function addDirectoryRoute(route) {
     var handlerPath = getHandlerPath(route);
     server_1.server.route({
         method: route.method.toUpperCase(),
-        path: route.path + '/{param*}',
+        path: route.path + '/{...}',
         handler: {
-            directory: {
-                path: handlerPath
-            }
+            directory: handlerPath
         }
     });
-    log.info(route.path + ": Directory route added");
+    log.info(`${route.path}: Directory route added`);
 }
 function getHandlerPath(route) {
     var handlerPath = path.resolve(path.join(workingDirectory, route.handler));
@@ -109,7 +109,7 @@ function getHandlerPath(route) {
 }
 function isValidFunctionRoute(route) {
     try {
-        var evalFunc = eval("(" + route.handler + ")");
+        var evalFunc = eval(`(${route.handler})`);
         if (typeof evalFunc === 'function')
             return true;
     }
@@ -140,5 +140,4 @@ function getHandlerType(route) {
         return 3 /* NotFound */;
     }
 }
-module.exports = parseRoutes;
 //# sourceMappingURL=routes.js.map

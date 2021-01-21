@@ -1,9 +1,10 @@
 {
     "port": 7331,
+    "main": "briskly.html",
     "routes": {
         "/five": {
             "method": "GET",
-            "handler": "test/routes/home",
+            "handler": "test-src/routes/home",
             "aliases": ["index.html", "index.php", "index.shtml"]
         },
         
@@ -12,7 +13,7 @@
             "handler": "function (req, reply) { reply('five'); }"
         },
         "include": {
-            "root": "test/includes",
+            "root": "test-src/includes",
             "files": [
                 "users.json",
                 "maths"
@@ -21,8 +22,8 @@
     },
     "components": {
         "br-modal": {
-            "template": "test/components/modal/view.html",
-            "viewModel": "test/components/modal/modal.js"
+            "template": "test-src/components/modal/view.html",
+            "viewModel": "test-src/components/modal/modal.js"
         }
     }
     
